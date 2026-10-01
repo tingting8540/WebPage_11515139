@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拾光 | 學生校園生活與青春回憶平台</title>
+  <style>
+    /* 品牌配色與變數定義 */
+    :root {
+      --navy-primary: #12233D;
+      --navy-secondary: #1F3659;
+      --navy-light: #2E4B75;
+      --navy-dark: #0A1424;
+      
+      --cream-bg: #FAF8F5;
+      --cream-card: #FFFFFF;
+      --cream-alt: #F3EFEA;
+      --cream-border: #E8E2D8;
+
+      --gray-light: #F1F3F5;
+      --gray-border: #E2E6EA;
+      --gray-muted: #8792A2;
+      --gray-text: #596574;
+      --gray-dark: #2F3640;
+
+      --shadow-sm: 0 2px 8px rgba(18, 35, 61, 0.04);
+      --shadow-md: 0 8px 24px rgba(18, 35, 61, 0.08);
+      --shadow-lg: 0 16px 36px rgba(18, 35, 61, 0.12);
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background-color: var(--cream-bg);
+      color: var(--navy-dark);
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button, input, textarea, select {
+      font-family: inherit;
+    }
+
+    /* 頂部導覽列 */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--cream-border);
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-badge {
+      width: 40px;
+      height: 40px;
+      background-color: var(--navy-primary);
+      color: var(--cream-bg);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 1px;
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--navy-primary);
+      letter-spacing: 0.05em;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--gray-text);
+      display: block;
+      margin-top: -3px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      color: var(--navy-secondary);
+      font-weight: 500;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--navy-primary);
+      background: var(--cream-alt);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background-color: var(--navy-primary);
+      color: var(--cream-bg);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--navy-secondary);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--navy-primary);
+      color: var(--navy-primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--navy-primary);
+      color: var(--cream-bg);
+    }
+
+    .tag-badge {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      background: var(--cream-alt);
+      color: var(--navy-secondary);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* 主要內容容器 */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* Hero 區塊 */
+    .hero {
+      text-align: center;
+      padding: 4.5rem 1.5rem 3.5rem;
+      background: linear-gradient(180deg, #F3EFEA 0%, rgba(250, 248, 245, 0.4) 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--cream-border);
+      margin-bottom: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-audience-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #FFFFFF;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--cream-border);
+      font-size: 0.82rem;
+      color: var(--navy-secondary);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-audience-tag span {
+      width: 7px;
+      height: 7px;
+      background: #2E7D32;
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--navy-primary);
+      letter-spacing: 0.04em;
+      margin-bottom: 1.2rem;
+      line-height: 1.3;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+      color: var(--gray-text);
+      line-height: 1.8;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(226, 230, 234, 0.8);
+    }
+
+    .stat-item h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--navy-primary);
+    }
+
+    .stat-item p {
+      font-size: 0.85rem;
+      color: var(--gray-muted);
+      margin-bottom: 0;
+    }
+
+    /* 區塊標題 */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.8rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--navy-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 5px;
+      height: 1.4rem;
+      background-color: var(--navy-primary);
+      border-radius: 3px;
+    }
+
+    .section-desc {
+      font-size: 0.92rem;
+      color: var(--gray-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* 1. 回憶文章模組 */
+    .articles-section {
+      margin-bottom: 4rem;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--cream-border);
+      background: var(--cream-card);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: var(--gray-text);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--navy-primary);
+      color: #FFFFFF;
+      border-color: var(--navy-primary);
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .article-card {
+      background: var(--cream-card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--cream-border);
+      padding: 1.6rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .article-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: #D2CBC0;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.9rem;
+      font-size: 0.8rem;
+      color: var(--gray-muted);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy-primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.45;
+    }
+
+    .card-excerpt {
+      font-size: 0.92rem;
+      color: var(--gray-text);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--gray-border);
+      font-size: 0.82rem;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .author-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--navy-secondary);
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: var(--navy-dark);
+    }
+
+    .author-role {
+      font-size: 0.75rem;
+      color: var(--gray-muted);
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      color: var(--gray-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.85rem;
+      transition: var(--transition);
+    }
+
+    .action-btn:hover, .action-btn.active {
+      color: #D32F2F;
+    }
+
+    /* 2. 照片上傳模組 */
+    .upload-section {
+      margin-bottom: 4rem;
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--cream-border);
+      padding: 2.2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .upload-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .dropzone {
+      border: 2px dashed var(--cream-border);
+      border-radius: var(--radius-md);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      background: var(--cream-bg);
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dropzone:hover, .dropzone.dragover {
+      border-color: var(--navy-primary);
+      background: #F4F1EA;
+    }
+
+    .upload-icon {
+      width: 48px;
+      height: 48px;
+      color: var(--navy-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .dropzone p {
+      font-size: 0.95rem;
+      color: var(--navy-secondary);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .dropzone span {
+      font-size: 0.8rem;
+      color: var(--gray-muted);
+    }
+
+    .preview-container {
+      margin-top: 1rem;
+      width: 100%;
+      display: none;
+    }
+
+    .preview-img {
+      max-width: 100%;
+      max-height: 180px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      border: 1px solid var(--cream-border);
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--navy-secondary);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-sm);
+      background: var(--cream-bg);
+      color: var(--navy-dark);
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--navy-primary);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(18, 35, 61, 0.08);
+    }
+
+    /* 3. 個人回憶錄模組 */
+    .memoir-section {
+      margin-bottom: 4rem;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin-top: 2rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 7px;
+      width: 2px;
+      background: var(--cream-border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2rem;
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 3px solid var(--navy-primary);
+      box-shadow: 0 0 0 2px var(--cream-bg);
+    }
+
+    .timeline-content {
+      background: var(--cream-card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--cream-border);
+      padding: 1.4rem 1.6rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .timeline-date {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--navy-secondary);
+      background: var(--cream-alt);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-body {
+      font-size: 0.92rem;
+      color: var(--gray-text);
+      line-height: 1.65;
+    }
+
+    /* 4. 留言互動模組 */
+    .comments-section {
+      margin-bottom: 3rem;
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--cream-border);
+      padding: 2.2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .comment-input-card {
+      background: var(--cream-bg);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      border: 1px solid var(--cream-border);
+      margin-bottom: 2rem;
+    }
+
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .comment-card {
+      padding: 1.25rem;
+      border-radius: var(--radius-sm);
+      background: var(--cream-bg);
+      border: 1px solid var(--cream-border);
+      display: flex;
+      gap: 1rem;
+    }
+
+    .comment-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--navy-primary);
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+    }
+
+    .comment-author-name {
+      font-weight: 700;
+      color: var(--navy-primary);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .comment-time {
+      font-size: 0.78rem;
+      color: var(--gray-muted);
+    }
+
+    .comment-text {
+      font-size: 0.9rem;
+      color: var(--gray-text);
+      line-height: 1.6;
+    }
+
+    /* 頁尾 */
+    footer {
+      background: var(--navy-primary);
+      color: var(--cream-bg);
+      padding: 3rem 1.5rem 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid var(--navy-dark);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-desc {
+      font-size: 0.9rem;
+      color: #B2BEC3;
+      margin-top: 0.75rem;
+      max-width: 420px;
+      line-height: 1.7;
+    }
+
+    .footer-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #FFFFFF;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-links a {
+      color: #B2BEC3;
+      font-size: 0.88rem;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: #FFFFFF;
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #8792A2;
+    }
+
+    /* 響應式微調 */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero-stats {
+        gap: 1.5rem;
+      }
+      .upload-container {
+        grid-template-columns: 1fr;
+      }
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header>
+    <div class="nav-container">
+      <div class="brand">
+        <div class="logo-badge">拾</div>
+        <div>
+          <span class="brand-title">拾光</span>
+          <span class="brand-subtitle">校園青春回憶庫</span>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#home" class="nav-link active">首頁</a>
+        <a href="#articles" class="nav-link">回憶文章</a>
+        <a href="#upload" class="nav-link">照片上傳</a>
+        <a href="#memoir" class="nav-link">個人回憶錄</a>
+        <a href="#comments" class="nav-link">留言互動</a>
+      </nav>
+
+      <div class="nav-actions">
+        <span class="tag-badge">在校生 / 畢業生</span>
+        <a href="#upload" class="btn btn-primary">+ 分享回憶</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main id="home">
+    
+    <!-- Hero 旗艦視覺區 -->
+    <section class="hero">
+      <div class="hero-audience-tag">
+        <span></span> 目標受眾：在校生 · 畢業生
+      </div>
+      <h1>拾起流光歲月，定格青春瞬間</h1>
+      <p>
+        「拾光」專為所有校園學子設計，紀錄那些在教室、操場、圖書館與宿舍裡微小而珍貴的片刻。<br>
+        不論你正在校園裡揮灑汗水，或是已踏入社會回望年少，這裡都有屬於你的時光膠囊。
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="#articles" class="btn btn-primary" style="padding: 0.75rem 1.6rem;">探索回憶文章</a>
+        <a href="#upload" class="btn btn-outline" style="padding: 0.75rem 1.6rem;">立即上傳照片</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <h3 id="statStories">1,280</h3>
+          <p>篇青春記事</p>
+        </div>
+        <div class="stat-item">
+          <h3 id="statPhotos">4,650</h3>
+          <p>張光影相簿</p>
+        </div>
+        <div class="stat-item">
+          <h3>99.8%</h3>
+          <p>共鳴溫馨度</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. 功能模組：回憶文章 -->
+    <section class="articles-section" id="articles">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">回憶文章</h2>
+          <p class="section-desc">閱讀屬於不同世代學生的日常風景與悸動故事</p>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterArticles('all', this)">全部</button>
+          <button class="filter-btn" onclick="filterArticles('campus', this)">校園生活</button>
+          <button class="filter-btn" onclick="filterArticles('grad', this)">畢業紀念</button>
+          <button class="filter-btn" onclick="filterArticles('club', this)">社團熱血</button>
+        </div>
+      </div>
+
+      <div class="article-grid">
+        <!-- 文章卡片 1 -->
+        <article class="article-card" data-category="campus">
+          <div>
+            <div class="card-meta">
+              <span class="tag-badge">校園日常</span>
+              <span>2024-05-18</span>
+            </div>
+            <h3 class="card-title">傍晚五點半的圖書館窗邊，有我最想念的金黃餘暉</h3>
+            <p class="card-excerpt">
+              每次期末考週最期待的就是那抹灑在木質長桌上的夕陽。筆尖刷刷作響，身旁同學疲憊卻堅定的側臉，那是我們一起熬過青春的印記。
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="author-info">
+              <div class="author-avatar">林</div>
+              <div>
+                <div class="author-name">林語晴</div>
+                <div class="author-role">在校生 · 資訊系大三</div>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="action-btn" onclick="toggleLike(this)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <span class="like-count">142</span>
+              </button>
+              <button class="action-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                <span>18</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 文章卡片 2 -->
+        <article class="article-card" data-category="club">
+          <div>
+            <div class="card-meta">
+              <span class="tag-badge">社團熱血</span>
+              <span>2023-12-04</span>
+            </div>
+            <h3 class="card-title">吉他弦斷掉的那一刻，台下的掌聲是我聽過最美的合音</h3>
+            <p class="card-excerpt">
+              成發演出的倒數第二首歌，高音推弦瞬間啪的一聲。本以為完蛋了，主唱沒有停，鼓手加大力道，台下的學弟妹跟著大聲合唱。
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="author-info">
+              <div class="author-avatar" style="background:#2E4B75;">陳</div>
+              <div>
+                <div class="author-name">陳浩偉</div>
+                <div class="author-role">畢業生 · 搖滾吉他社前社長</div>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="action-btn" onclick="toggleLike(this)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <span class="like-count">236</span>
+              </button>
+              <button class="action-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                <span>32</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 文章卡片 3 -->
+        <article class="article-card" data-category="grad">
+          <div>
+            <div class="card-meta">
+              <span class="tag-badge">畢業紀念</span>
+              <span>2024-06-15</span>
+            </div>
+            <h3 class="card-title">撥穗那一秒，我們笑著合照，卻在轉身後悄悄紅了眼眶</h3>
+            <p class="card-excerpt">
+              走過四年的林蔭大道，手裡握著學位證書。大家忙著拋學士帽，但心裡都知道，這扇校門走出去後，我們就要各自奔向真實的大人世界了。
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="author-info">
+              <div class="author-avatar" style="background:#596574;">張</div>
+              <div>
+                <div class="author-name">張凱婷</div>
+                <div class="author-role">畢業生 · 2024級校友</div>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="action-btn" onclick="toggleLike(this)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <span class="like-count">389</span>
+              </button>
+              <button class="action-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                <span>45</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 2. 功能模組：照片上傳 -->
+    <section class="upload-section" id="upload">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">照片上傳</h2>
+          <p class="section-desc">封存那張專屬你與校園的光影記憶，支援即時預覽與故事紀錄</p>
+        </div>
+      </div>
+
+      <div class="upload-container">
+        <!-- 拖曳或選取區 -->
+        <div>
+          <div class="dropzone" id="dropzone" onclick="document.getElementById('photoInput').click()">
+            <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <p>點擊此處或拖曳照片至此上傳</p>
+            <span>支援 JPG、PNG 格式，檔案上限 10MB</span>
+            <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="previewImage(event)">
+            <div class="preview-container" id="previewContainer">
+              <img id="previewImg" class="preview-img" alt="預覽照片">
+            </div>
+          </div>
+        </div>
+
+        <!-- 照片描述表單 -->
+        <form id="uploadForm" onsubmit="handlePhotoSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="photoTitle">照片標題</label>
+            <input type="text" id="photoTitle" class="form-control" placeholder="例如：大三專題發表日的日落" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="photoCategory">回憶分類</label>
+              <select id="photoCategory" class="form-control">
+                <option value="校園景致">校園景致</option>
+                <option value="社團活動">社團活動</option>
+                <option value="畢業典禮">畢業典禮</option>
+                <option value="宿舍同樂">宿舍同樂</option>
+                <option value="教室時光">教室時光</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="userRole">您的身分</label>
+              <select id="userRole" class="form-control">
+                <option value="在校生">在校生</option>
+                <option value="畢業生">畢業生</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="photoDesc">回憶小記 (選填)</label>
+            <textarea id="photoDesc" class="form-control" rows="3" placeholder="寫下一兩句話，紀錄當時的心情或同伴..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">
+            上傳並永久珍藏
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 3. 功能模組：個人回憶錄 -->
+    <section class="memoir-section" id="memoir">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">個人回憶錄</h2>
+          <p class="section-desc">梳理你在校園的成長年輪，從新生啟程到畢業展翅的每一步</p>
+        </div>
+        <button class="btn btn-outline" onclick="addMemoirMilestone()">+ 新增時光里程碑</button>
+      </div>
+
+      <div class="timeline" id="memoirTimeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">大一 · 2021 秋季</span>
+            <h4 class="timeline-title">背著行囊走進校門，第一次在文學院迷路</h4>
+            <p class="timeline-body">
+              剛拿到學生證的興奮與對未來大學四年的憧憬。第一次吃學生餐廳，和室友通宵暢聊到清晨看日出。
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">大二 · 2022 春季</span>
+            <h4 class="timeline-title">接下社團幹部與系學會活動，學會並肩作戰</h4>
+            <p class="timeline-body">
+              無數次在活動中心開會到深夜，大家分著一包鹹酥雞，為了系際盃大隊接力排練與加油喊啞了喉嚨。
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">大三 · 2023 冬季</span>
+            <h4 class="timeline-title">畢業專題發表與實習面試，在挑戰中茁壯</h4>
+            <p class="timeline-body">
+              電腦螢幕前的 Debug 漫漫長夜，和組員討論到意見不合又擁抱和好。那些壓力成為了我們最堅實的底氣。
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">大四 · 2024 夏季</span>
+            <h4 class="timeline-title">穿上學士袍，向校園草地投擲藍天的祝福</h4>
+            <p class="timeline-body">
+              在校門口雕像前拍下了最後一張全體大合照。各自踏出校門，但回憶會一直在此發光。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 功能模組：留言互動 -->
+    <section class="comments-section" id="comments">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">留言互動</h2>
+          <p class="section-desc">在校生的期待與迷惘，畢業生的祝福與叮嚀，在此溫暖相遇</p>
+        </div>
+      </div>
+
+      <!-- 留言輸入區 -->
+      <div class="comment-input-card">
+        <form id="commentForm" onsubmit="handleCommentSubmit(event)">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <label class="form-label" for="commentAuthor">暱稱 / 姓名</label>
+              <input type="text" id="commentAuthor" class="form-control" placeholder="請輸入姓名或化名" required>
+            </div>
+            <div>
+              <label class="form-label" for="commentIdentity">身分標籤</label>
+              <select id="commentIdentity" class="form-control">
+                <option value="在校生">在校生</option>
+                <option value="畢業校友">畢業校友</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="commentMessage">留言內容</label>
+            <textarea id="commentMessage" class="form-control" rows="3" placeholder="留下一段給自己、學弟妹或母校的話語吧..." required></textarea>
+          </div>
+          <div style="text-align: right;">
+            <button type="submit" class="btn btn-primary">送出留言</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- 留言列表展示 -->
+      <div class="comment-list" id="commentList">
+        <div class="comment-card">
+          <div class="comment-avatar">王</div>
+          <div style="flex: 1;">
+            <div class="comment-header">
+              <div class="comment-author-name">
+                王怡萱
+                <span class="tag-badge">畢業校友</span>
+              </div>
+              <span class="comment-time">10 分鐘前</span>
+            </div>
+            <p class="comment-text">
+              畢業三年了，今天路過母校門口看到學弟妹在辦迎新，真的很懷念那段無憂無慮、為了一碗宵夜就能騎車衝到海邊的時光！學弟妹們一定要好好珍惜大學時光啊！
+            </p>
+          </div>
+        </div>
+
+        <div class="comment-card">
+          <div class="comment-avatar" style="background:#2E4B75;">李</div>
+          <div style="flex: 1;">
+            <div class="comment-header">
+              <div class="comment-author-name">
+                李冠廷
+                <span class="tag-badge">在校生</span>
+              </div>
+              <span class="comment-time">1 小時前</span>
+            </div>
+            <p class="comment-text">
+              剛進大一還在摸索選課跟社團，看到各位學長姐的回憶錄覺得好安心，希望能跟你們一樣把這四年過得精彩無憾！
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 簡約品牌頁尾 -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <div class="brand" style="margin-bottom: 0.5rem;">
+          <div class="logo-badge" style="background:#FFFFFF; color:var(--navy-primary);">拾</div>
+          <span class="brand-title" style="color:#FFFFFF;">拾光</span>
+        </div>
+        <p class="footer-desc">
+          簡約、純粹的校園回憶珍藏庫。提供學生分享校園生活、紀錄青春回憶，串聯在校生與畢業生的深厚羈絆。
+        </p>
+      </div>
+
+      <div>
+        <h4 class="footer-title">核心功能</h4>
+        <ul class="footer-links">
+          <li><a href="#articles">回憶文章瀏覽</a></li>
+          <li><a href="#upload">相片光影上傳</a></li>
+          <li><a href="#memoir">個人成長回憶錄</a></li>
+          <li><a href="#comments">跨世代留言互動</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">平台理念</h4>
+        <ul class="footer-links">
+          <li><a href="#home">簡約設計風格</a></li>
+          <li><a href="#home">深藍 · 米白 · 灰</a></li>
+          <li><a href="#home">在校生與畢業生社群</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 拾光 (Time Capsule). 依據規格文件 outline.md 製作</span>
+      <span>簡約風格 · 深藍 / 米白 / 灰色</span>
+    </div>
+  </footer>
+
+  <!-- 簡易互動腳本 -->
+  <script>
+    // 1. 回憶文章分類篩選
+    function filterArticles(category, btnElement) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      const cards = document.querySelectorAll('.article-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // 2. 愛心點擊計數
+    function toggleLike(btn) {
+      const countSpan = btn.querySelector('.like-count');
+      let current = parseInt(countSpan.textContent, 10);
+      if (btn.classList.contains('active')) {
+        btn.classList.remove('active');
+        countSpan.textContent = current - 1;
+      } else {
+        btn.classList.add('active');
+        countSpan.textContent = current + 1;
+      }
+    }
+
+    // 3. 照片預覽處理
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const previewContainer = document.getElementById('previewContainer');
+        const previewImg = document.getElementById('previewImg');
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewImg.src = e.target.result;
+          previewContainer.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // 照片表單提交
+    function handlePhotoSubmit(event) {
+      event.preventDefault();
+      const title = document.getElementById('photoTitle').value;
+      const category = document.getElementById('photoCategory').value;
+      alert(`【拾光】照片「${title}」已成功記錄至「${category}」時光庫！`);
+      
+      // 更新統計數字
+      const statPhotos = document.getElementById('statPhotos');
+      const current = parseInt(statPhotos.textContent.replace(',', ''), 10);
+      statPhotos.textContent = (current + 1).toLocaleString();
+
+      event.target.reset();
+      document.getElementById('previewContainer').style.display = 'none';
+    }
+
+    // 4. 新增里程碑
+    function addMemoirMilestone() {
+      const title = prompt('請輸入里程碑標題：', '大三下學期 · 第一次自主專案發布');
+      if (!title) return;
+      const desc = prompt('請輸入這段回憶的說明：', '和夥伴們共同熬夜完成，最後順利展出，滿滿的感動。');
+      if (!desc) return;
+
+      const timeline = document.getElementById('memoirTimeline');
+      const newItem = document.createElement('div');
+      newItem.className = 'timeline-item';
+      newItem.innerHTML = `
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">自訂時光紀錄</span>
+          <h4 class="timeline-title">${escapeHTML(title)}</h4>
+          <p class="timeline-body">${escapeHTML(desc)}</p>
+        </div>
+      `;
+      timeline.insertBefore(newItem, timeline.firstChild);
+      alert('已新增一筆青春里程碑！');
+    }
+
+    // 5. 留言送出處理
+    function handleCommentSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('commentAuthor').value;
+      const identity = document.getElementById('commentIdentity').value;
+      const message = document.getElementById('commentMessage').value;
+
+      const commentList = document.getElementById('commentList');
+      const newCard = document.createElement('div');
+      newCard.className = 'comment-card';
+      const initial = name.charAt(0) || '友';
+
+      newCard.innerHTML = `
+        <div class="comment-avatar" style="background: #1F3659;">${escapeHTML(initial)}</div>
+        <div style="flex: 1;">
+          <div class="comment-header">
+            <div class="comment-author-name">
+              ${escapeHTML(name)}
+              <span class="tag-badge">${escapeHTML(identity)}</span>
+            </div>
+            <span class="comment-time">剛剛</span>
+          </div>
+          <p class="comment-text">${escapeHTML(message)}</p>
+        </div>
+      `;
+
+      commentList.insertBefore(newCard, commentList.firstChild);
+      event.target.reset();
+      alert('留言已發布！');
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, 
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag] || tag)
+      );
+    }
+  </script>
+</body>
+</html>
+
